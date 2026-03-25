@@ -1,0 +1,179 @@
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+
+const resources = {
+  en: {
+    translation: {
+      nav: {
+        home: 'Home',
+        search: 'Search',
+        wishlist: 'Wishlist',
+        login: 'Login',
+        register: 'Register',
+        account: 'My Account',
+        logout: 'Logout',
+      },
+      home: {
+        nowPlaying: 'Now Playing',
+        allGenres: 'All Genres',
+        sortBy: 'Sort By',
+      },
+      movie: {
+        addWishlist: 'Add to Wishlist',
+        removeWishlist: 'Remove from Wishlist',
+        watchTrailer: 'Watch Trailer',
+        recommendations: 'Recommendations',
+        overview: 'Overview',
+        rating: 'Rating',
+        releaseDate: 'Release Date',
+        genres: 'Genres',
+      },
+      wishlist: {
+        title: 'My Wishlist',
+        empty: 'Your wishlist is empty',
+        emptyDesc: 'Add movies you love to keep track of them.',
+      },
+      search: {
+        placeholder: 'Search for movies...',
+        noResults: 'No results found for',
+        results: 'Results for',
+      },
+      auth: {
+        loginTitle: 'Welcome Back',
+        registerTitle: 'Create Account',
+        email: 'Email',
+        username: 'Username',
+        password: 'Password',
+        loginBtn: 'Login',
+        registerBtn: 'Register',
+        noAccount: "Don't have an account?",
+        hasAccount: 'Already have an account?',
+      },
+      common: {
+        loading: 'Loading...',
+        error: 'Something went wrong',
+        backToTop: 'Back to top',
+        darkMode: 'Dark mode',
+        lightMode: 'Light mode',
+        page: 'Page',
+        of: 'of',
+      },
+    },
+  },
+  ar: {
+    translation: {
+      nav: {
+        home: 'الرئيسية',
+        search: 'بحث',
+        wishlist: 'المفضلة',
+        login: 'تسجيل الدخول',
+        register: 'إنشاء حساب',
+        account: 'حسابي',
+        logout: 'تسجيل الخروج',
+      },
+      home: {
+        nowPlaying: 'يُعرض الآن',
+        allGenres: 'جميع التصنيفات',
+        sortBy: 'ترتيب حسب',
+      },
+      movie: {
+        addWishlist: 'أضف للمفضلة',
+        removeWishlist: 'احذف من المفضلة',
+        watchTrailer: 'شاهد الإعلان',
+        recommendations: 'توصيات',
+        overview: 'نبذة',
+        rating: 'التقييم',
+        releaseDate: 'تاريخ الإصدار',
+        genres: 'التصنيفات',
+      },
+      wishlist: {
+        title: 'قائمة أمنياتي',
+        empty: 'قائمتك فارغة',
+        emptyDesc: 'أضف الأفلام التي تحبها لمتابعتها.',
+      },
+      search: {
+        placeholder: 'ابحث عن أفلام...',
+        noResults: 'لا توجد نتائج لـ',
+        results: 'نتائج لـ',
+      },
+      auth: {
+        loginTitle: 'مرحبًا بعودتك',
+        registerTitle: 'إنشاء حساب جديد',
+        email: 'البريد الإلكتروني',
+        username: 'اسم المستخدم',
+        password: 'كلمة المرور',
+        loginBtn: 'دخول',
+        registerBtn: 'تسجيل',
+        noAccount: 'ليس لديك حساب؟',
+        hasAccount: 'لديك حساب بالفعل؟',
+      },
+      common: {
+        loading: 'جارٍ التحميل...',
+        error: 'حدث خطأ ما',
+        backToTop: 'للأعلى',
+        darkMode: 'الوضع الداكن',
+        lightMode: 'الوضع الفاتح',
+        page: 'صفحة',
+        of: 'من',
+      },
+    },
+  },
+  fr: {
+    translation: {
+      nav: {
+        home: 'Accueil',
+        search: 'Recherche',
+        wishlist: 'Ma liste',
+        login: 'Connexion',
+        register: "S'inscrire",
+        account: 'Mon compte',
+        logout: 'Déconnexion',
+      },
+      home: { nowPlaying: 'À l\'affiche', allGenres: 'Tous les genres', sortBy: 'Trier par' },
+      movie: {
+        addWishlist: 'Ajouter à la liste',
+        removeWishlist: 'Retirer de la liste',
+        watchTrailer: 'Voir la bande-annonce',
+        recommendations: 'Recommandations',
+        overview: 'Synopsis',
+        rating: 'Note',
+        releaseDate: 'Date de sortie',
+        genres: 'Genres',
+      },
+      wishlist: { title: 'Ma liste', empty: 'Votre liste est vide', emptyDesc: 'Ajoutez des films que vous aimez.' },
+      search: { placeholder: 'Rechercher des films...', noResults: 'Aucun résultat pour', results: 'Résultats pour' },
+      auth: {
+        loginTitle: 'Content de vous revoir',
+        registerTitle: 'Créer un compte',
+        email: 'Email',
+        username: "Nom d'utilisateur",
+        password: 'Mot de passe',
+        loginBtn: 'Connexion',
+        registerBtn: "S'inscrire",
+        noAccount: 'Pas encore de compte ?',
+        hasAccount: 'Déjà un compte ?',
+      },
+      common: { loading: 'Chargement...', error: 'Une erreur est survenue', backToTop: 'Haut de page', darkMode: 'Mode sombre', lightMode: 'Mode clair', page: 'Page', of: 'sur' },
+    },
+  },
+  zh: {
+    translation: {
+      nav: { home: '首页', search: '搜索', wishlist: '心愿单', login: '登录', register: '注册', account: '我的账户', logout: '退出' },
+      home: { nowPlaying: '正在上映', allGenres: '所有类型', sortBy: '排序方式' },
+      movie: { addWishlist: '加入心愿单', removeWishlist: '移出心愿单', watchTrailer: '观看预告片', recommendations: '推荐', overview: '简介', rating: '评分', releaseDate: '上映日期', genres: '类型' },
+      wishlist: { title: '我的心愿单', empty: '心愿单为空', emptyDesc: '添加你喜欢的电影。' },
+      search: { placeholder: '搜索电影...', noResults: '没有找到', results: '搜索结果：' },
+      auth: { loginTitle: '欢迎回来', registerTitle: '创建账户', email: '邮箱', username: '用户名', password: '密码', loginBtn: '登录', registerBtn: '注册', noAccount: '没有账户？', hasAccount: '已有账户？' },
+      common: { loading: '加载中...', error: '出现错误', backToTop: '回到顶部', darkMode: '深色模式', lightMode: '浅色模式', page: '第', of: '页，共' },
+    },
+  },
+}
+
+i18n.use(initReactI18next).init({
+  resources,
+  lng: localStorage.getItem('app_language') || 'en',
+  fallbackLng: 'en',
+  interpolation: { escapeValue: false },
+})
+
+export default i18n

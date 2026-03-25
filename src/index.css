@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #E50914;
+    --color-primary-dark: #B81D24;
+    --color-bg: #ffffff;
+    --color-surface: #f3f4f6;
+    --color-card: #ffffff;
+    --color-text: #111827;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
+  }
+
+  .dark {
+    --color-bg: #0f0f0f;
+    --color-surface: #141414;
+    --color-card: #1c1c1c;
+    --color-text: #f9fafb;
+    --color-text-muted: #9ca3af;
+    --color-border: #2d2d2d;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply font-body;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3 {
+    @apply font-heading tracking-wide;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-surface) 25%,
+      var(--color-card) 50%,
+      var(--color-surface) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-dark text-white font-body font-semibold 
+           px-5 py-2.5 rounded-lg transition-all duration-200 
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* RTL support */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
