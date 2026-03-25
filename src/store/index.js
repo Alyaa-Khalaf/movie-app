@@ -1,5 +1,5 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 // ─── Auth Store ───────────────────────────────────────────────────────────────
 export const useAuthStore = create(
@@ -8,18 +8,16 @@ export const useAuthStore = create(
       user: null,
       isAuthenticated: false,
 
-      login: (userData) =>
-        set({ user: userData, isAuthenticated: true }),
+      login: (userData) => set({ user: userData, isAuthenticated: true }),
 
-      logout: () =>
-        set({ user: null, isAuthenticated: false }),
+      logout: () => set({ user: null, isAuthenticated: false }),
 
       updateUser: (updates) =>
         set((state) => ({ user: { ...state.user, ...updates } })),
     }),
-    { name: 'auth-storage' }
-  )
-)
+    { name: "auth-storage" },
+  ),
+);
 
 // ─── Wishlist Store ───────────────────────────────────────────────────────────
 export const useWishlistStore = create(
@@ -28,9 +26,9 @@ export const useWishlistStore = create(
       wishlist: [],
 
       addToWishlist: (movie) => {
-        const exists = get().wishlist.find((m) => m.id === movie.id)
+        const exists = get().wishlist.find((m) => m.id === movie.id);
         if (!exists) {
-          set((state) => ({ wishlist: [...state.wishlist, movie] }))
+          set((state) => ({ wishlist: [...state.wishlist, movie] }));
         }
       },
 
@@ -40,46 +38,45 @@ export const useWishlistStore = create(
         })),
 
       toggleWishlist: (movie) => {
-        const exists = get().wishlist.find((m) => m.id === movie.id)
+        const exists = get().wishlist.find((m) => m.id === movie.id);
         if (exists) {
-          get().removeFromWishlist(movie.id)
-          return false // removed
+          get().removeFromWishlist(movie.id);
+          return false; // removed
         } else {
-          get().addToWishlist(movie)
-          return true // added
+          get().addToWishlist(movie);
+          return true; // added
         }
       },
 
-      isInWishlist: (movieId) =>
-        get().wishlist.some((m) => m.id === movieId),
+      isInWishlist: (movieId) => get().wishlist.some((m) => m.id === movieId),
 
       clearWishlist: () => set({ wishlist: [] }),
     }),
-    { name: 'wishlist-storage' }
-  )
-)
+    { name: "wishlist-storage" },
+  ),
+);
 
 // ─── UI/Theme Store ───────────────────────────────────────────────────────────
 export const useThemeStore = create(
   persist(
     (set) => ({
       isDark: true,
-      language: 'en',
+      language: "en",
 
       toggleDark: () =>
         set((state) => {
-          const newVal = !state.isDark
-          document.documentElement.classList.toggle('dark', newVal)
-          return { isDark: newVal }
+          const newVal = !state.isDark;
+          document.documentElement.classList.toggle("dark", newVal);
+          return { isDark: newVal };
         }),
 
       setLanguage: (lang) => {
-        localStorage.setItem('app_language', lang)
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
-        document.documentElement.lang = lang
-        set({ language: lang })
+        localStorage.setItem("app_language", lang);
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+        document.documentElement.lang = lang;
+        set({ language: lang });
       },
     }),
-    { name: 'theme-storage' }
-  )
-)
+    { name: "theme-storage" },
+  ),
+);
