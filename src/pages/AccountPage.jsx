@@ -40,7 +40,7 @@ export default function AccountPage() {
                 {user?.email}
               </p>
               <div className="px-3 py-1 text-xs font-bold uppercase rounded-full bg-primary/20 text-primary">
-                Member
+                {t("nav.login") === "Login" ? "Member" : "عضو"}{" "}
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function AccountPage() {
               <div className="px-6 py-4 border-b border-[var(--color-border)] bg-[var(--color-bg)]/50">
                 <h3 className="flex items-center gap-2 font-bold">
                   <Shield size={18} className="text-primary" />
-                  Personal Info
+                  {t("account.personalInfo")}{" "}
                 </h3>
               </div>
 

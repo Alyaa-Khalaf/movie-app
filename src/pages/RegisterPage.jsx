@@ -6,9 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/components/auth/InputField";
 import { useAuth } from "@/hooks/useAuth";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterPage() {
-  usePageTitle("Create Account");
+  const { t } = useTranslation();
+  usePageTitle(t("nav.register"));
 
   const navigate = useNavigate();
   const { signup } = useAuth();
@@ -24,10 +26,10 @@ export default function RegisterPage() {
   const onSubmit = async (data) => {
     try {
       await signup(data.email, data.password, data.username);
-      toast("Account created successfully!");
+      toast.success(t("auth.registerSuccess"));
       navigate("/login");
     } catch (error) {
-      toast.error("Something went wrong!");
+      toast.error(t("common.error"));
       console.error(error);
     }
   };
@@ -38,47 +40,47 @@ export default function RegisterPage() {
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-4xl font-bold text-[var(--color-primary)]">
-            Join the Club
+            {t("auth.registerTitle")}
           </h1>
           <p className="text-[var(--color-text-muted)]">
-            Create an account to start your wishlist
+            {t("auth.registerSubtitle")}
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <InputField
-            label={"Username"}
+            label={t("auth.username")}
             type={"text"}
             name="username"
             register={register}
-            placeholder="Username"
+            placeholder={t("auth.username")}
             error={errors.username}
           />
 
           <InputField
-            label={"Email"}
+            label={t("auth.email")}
             type={"email"}
             name="email"
             register={register}
-            placeholder="Email"
+            placeholder={t("auth.email")}
             error={errors.email}
           />
 
           <InputField
-            label={"Password"}
+            label={t("auth.password")}
             type={"password"}
             name="password"
             register={register}
-            placeholder="Password"
+            placeholder={t("auth.password")}
             error={errors.password}
           />
           <InputField
-            label={"Confirm Password"}
+            label={t("auth.confirmPassword")}
             type={"password"}
             name="confirmPassword"
             register={register}
-            placeholder="Confirm Password"
+            placeholder={t("auth.confirmPassword")}
             error={errors.confirmPassword}
           />
 
@@ -87,18 +89,18 @@ export default function RegisterPage() {
             type="submit"
             className={`w-full mt-4 btn-primary disabled:opacity-50`}
           >
-            {isSubmitting ? "Creating Account..." : "Create Account"}
+            {isSubmitting ? t("common.loading") : t("auth.registerBtn")}{" "}
           </button>
         </form>
 
         {/* Footer Link */}
         <p className="mt-6 text-sm text-center text-[var(--color-text-muted)]">
-          Already have an account?{" "}
+          {t("auth.hasAccount")}{" "}
           <Link
             to="/login"
             className="text-[var(--color-primary)] font-semibold hover:underline"
           >
-            Login here
+            {t("auth.loginBtn")}{" "}
           </Link>
         </p>
       </div>
