@@ -19,6 +19,7 @@ export const useAuth = () => {
           uid: user.uid,
           email: user.email,
           username: user.displayName,
+          createdAt: user.metadata.creationTime,
         });
       } else {
         clearAuth();
