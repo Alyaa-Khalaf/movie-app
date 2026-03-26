@@ -1,55 +1,78 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router'
-import { useTranslation } from 'react-i18next'
-import { Heart, Search, Sun, Moon, User, LogOut, Globe, Menu, X } from 'lucide-react'
-import { useWishlistStore, useAuthStore, useThemeStore } from '@/store'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+import {
+  Heart,
+  Search,
+  Sun,
+  Moon,
+  User,
+  LogOut,
+  Globe,
+  Menu,
+  X,
+} from "lucide-react";
+import { useWishlistStore, useAuthStore, useThemeStore } from "@/store";
 
-const LANGUAGES = ['en', 'ar', 'fr', 'zh']
+const LANGUAGES = ["en", "ar", "fr", "zh"];
 
 export default function Navbar() {
-  const { t, i18n } = useTranslation()
-  const navigate = useNavigate()
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [langOpen, setLangOpen] = useState(false)
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
-  const wishlist = useWishlistStore((s) => s.wishlist)
-  const { isAuthenticated, user, logout } = useAuthStore()
-  const { isDark, toggleDark, language, setLanguage } = useThemeStore()
+  const wishlist = useWishlistStore((s) => s.wishlist);
+  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isDark, toggleDark, language, setLanguage } = useThemeStore();
 
   const handleLogout = () => {
-    logout()
-    navigate('/')
-  }
+    logout();
+    navigate("/");
+  };
 
   const handleLangChange = (lang) => {
-    setLanguage(lang)
-    i18n.changeLanguage(lang)
-    setLangOpen(false)
-  }
+    setLanguage(lang);
+    i18n.changeLanguage(lang);
+    setLangOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between h-16 gap-4 px-4 mx-auto max-w-7xl">
         {/* Logo */}
-        <Link to="/" className="font-heading text-2xl text-primary tracking-widest shrink-0">
+        <Link
+          to="/"
+          className="text-2xl tracking-widest font-heading text-primary shrink-0"
+        >
           CineVault
         </Link>
 
         {/* Desktop nav links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link to="/" className="hover:text-primary transition-colors">{t('nav.home')}</Link>
-          <Link to="/search" className="hover:text-primary transition-colors">{t('nav.search')}</Link>
+        <nav className="items-center hidden gap-6 text-sm font-medium md:flex">
+          <Link to="/" className="transition-colors hover:text-primary">
+            {t("nav.home")}
+          </Link>
+          <Link to="/search" className="transition-colors hover:text-primary">
+            {t("nav.search")}
+          </Link>
         </nav>
 
         {/* Actions */}
         <div className="flex items-center gap-3 ms-auto">
           {/* Search icon (mobile) */}
-          <button onClick={() => navigate('/search')} className="md:hidden p-2 hover:text-primary transition-colors">
+          <button
+            onClick={() => navigate("/search")}
+            className="p-2 transition-colors md:hidden hover:text-primary"
+          >
             <Search size={20} />
           </button>
 
           {/* Wishlist */}
-          <Link to="/wishlist" className="relative p-2 hover:text-primary transition-colors">
+          <Link
+            to="/wishlist"
+            className="relative p-2 transition-colors hover:text-primary"
+          >
             <Heart size={20} />
             {wishlist.length > 0 && (
               <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1">
@@ -59,13 +82,20 @@ export default function Navbar() {
           </Link>
 
           {/* Dark mode */}
-          <button onClick={toggleDark} className="p-2 hover:text-primary transition-colors" aria-label="Toggle theme">
+          <button
+            onClick={toggleDark}
+            className="p-2 transition-colors hover:text-primary"
+            aria-label="Toggle theme"
+          >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
           {/* Language */}
           <div className="relative">
-            <button onClick={() => setLangOpen((p) => !p)} className="p-2 hover:text-primary transition-colors flex items-center gap-1 text-sm uppercase font-semibold">
+            <button
+              onClick={() => setLangOpen((p) => !p)}
+              className="flex items-center gap-1 p-2 text-sm font-semibold uppercase transition-colors hover:text-primary"
+            >
               <Globe size={16} />
               {language}
             </button>
@@ -75,7 +105,7 @@ export default function Navbar() {
                   <button
                     key={lang}
                     onClick={() => handleLangChange(lang)}
-                    className={`block w-full text-start px-4 py-2 text-sm hover:bg-primary hover:text-white transition-colors uppercase font-semibold ${language === lang ? 'text-primary' : ''}`}
+                    className={`block w-full text-start px-4 py-2 text-sm hover:bg-primary hover:text-white transition-colors uppercase font-semibold ${language === lang ? "text-primary" : ""}`}
                   >
                     {lang}
                   </button>
@@ -86,28 +116,34 @@ export default function Navbar() {
 
           {/* Auth */}
           {isAuthenticated ? (
-            <div className="hidden md:flex items-center gap-2">
-              <Link to="/account" className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors">
+            <div className="items-center hidden gap-2 md:flex">
+              <Link
+                to="/account"
+                className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+              >
                 <User size={18} />
                 <span className="hidden lg:inline">{user?.username}</span>
               </Link>
-              <button onClick={handleLogout} className="p-2 hover:text-primary transition-colors">
+              <button
+                onClick={handleLogout}
+                className="p-2 transition-colors hover:text-primary"
+              >
                 <LogOut size={18} />
               </button>
             </div>
           ) : (
-            <div className="hidden md:flex items-center gap-2">
-              <Link to="/login" className="text-sm font-medium hover:text-primary transition-colors px-3 py-1.5">
-                {t('nav.login')}
-              </Link>
-              <Link to="/register" className="btn-primary text-sm py-1.5 px-4">
-                {t('nav.register')}
+            <div className="items-center hidden gap-2 md:flex">
+              <Link to="/login" className="btn-primary text-sm py-1.5 px-4">
+                {t("nav.login")}
               </Link>
             </div>
           )}
 
           {/* Mobile hamburger */}
-          <button onClick={() => setMobileOpen((p) => !p)} className="md:hidden p-2">
+          <button
+            onClick={() => setMobileOpen((p) => !p)}
+            className="p-2 md:hidden"
+          >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
@@ -116,21 +152,33 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-card)] px-4 py-4 flex flex-col gap-3 text-sm font-medium">
-          <Link to="/" onClick={() => setMobileOpen(false)}>{t('nav.home')}</Link>
-          <Link to="/search" onClick={() => setMobileOpen(false)}>{t('nav.search')}</Link>
+          <Link to="/" onClick={() => setMobileOpen(false)}>
+            {t("nav.home")}
+          </Link>
+          <Link to="/search" onClick={() => setMobileOpen(false)}>
+            {t("nav.search")}
+          </Link>
           {isAuthenticated ? (
             <>
-              <Link to="/account" onClick={() => setMobileOpen(false)}>{t('nav.account')}</Link>
-              <button onClick={handleLogout} className="text-start text-red-500">{t('nav.logout')}</button>
+              <Link to="/account" onClick={() => setMobileOpen(false)}>
+                {t("nav.account")}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-red-500 text-start"
+              >
+                {t("nav.logout")}
+              </button>
             </>
           ) : (
             <>
-              <Link to="/login" onClick={() => setMobileOpen(false)}>{t('nav.login')}</Link>
-              <Link to="/register" onClick={() => setMobileOpen(false)}>{t('nav.register')}</Link>
+              <Link to="/login" onClick={() => setMobileOpen(false)}>
+                {t("nav.register")}
+              </Link>
             </>
           )}
         </div>
       )}
     </header>
-  )
+  );
 }
