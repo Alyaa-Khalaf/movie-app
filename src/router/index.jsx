@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/common/BackToTop";
 import PageSkeleton from "@/components/common/PageSkeleton";
 import MovieDetailsSkeleton from "@/components/common/MovieDetailsSkeleton";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 // Lazy-loaded pages
 const HomePage = lazy(() => import("@/pages/HomePage"));
@@ -45,11 +46,25 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      { path: "wishlist", element: <WishlistPage /> },
+      {
+        path: "wishlist",
+        element: (
+          <ProtectedRoute>
+            <WishlistPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: "search", element: <SearchPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
-      { path: "account", element: <AccountPage /> },
+      {
+        path: "account",
+        element: (
+          <ProtectedRoute>
+            <AccountPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
