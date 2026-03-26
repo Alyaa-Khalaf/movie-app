@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { useWishlistStore, useAuthStore, useThemeStore } from "@/store";
+import { useAuth } from "@/hooks/useAuth";
 
 const LANGUAGES = ["en", "ar", "fr", "zh"];
 
@@ -23,12 +24,15 @@ export default function Navbar() {
   const [langOpen, setLangOpen] = useState(false);
 
   const wishlist = useWishlistStore((s) => s.wishlist);
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const { isDark, toggleDark, language, setLanguage } = useThemeStore();
 
-  const handleLogout = () => {
-    logout();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
     navigate("/");
+    setMobileOpen(false);
   };
 
   const handleLangChange = (lang) => {
@@ -173,7 +177,7 @@ export default function Navbar() {
           ) : (
             <>
               <Link to="/login" onClick={() => setMobileOpen(false)}>
-                {t("nav.register")}
+                {t("nav.login")}
               </Link>
             </>
           )}

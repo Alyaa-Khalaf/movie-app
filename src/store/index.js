@@ -8,9 +8,9 @@ export const useAuthStore = create(
       user: null,
       isAuthenticated: false,
 
-      login: (userData) => set({ user: userData, isAuthenticated: true }),
+      setAuth: (userData) => set({ user: userData, isAuthenticated: true }),
 
-      logout: () => set({ user: null, isAuthenticated: false }),
+      clearAuth: () => set({ user: null, isAuthenticated: false }),
 
       updateUser: (updates) =>
         set((state) => ({ user: { ...state.user, ...updates } })),

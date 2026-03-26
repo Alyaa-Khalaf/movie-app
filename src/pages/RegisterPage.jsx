@@ -23,7 +23,7 @@ export default function RegisterPage() {
   });
   const onSubmit = async (data) => {
     try {
-      await signup(data.email, data.password);
+      await signup(data.email, data.password, data.username);
       toast("Account created successfully!");
       navigate("/login");
     } catch (error) {
