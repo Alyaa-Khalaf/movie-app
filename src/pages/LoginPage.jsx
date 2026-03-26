@@ -4,22 +4,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/loginSchema";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/auth/InputField";
+import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   usePageTitle("Login");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid },
   } = useForm({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
   });
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    // navigate("/");
+  const onSubmit = async (data) => {
+    try {
+      await login(data.email, data.password);
+      toast("Logged in successfully!");
+      navigate("/");
+    } catch (error) {
+      toast.error("Invalid email or password");
+      console.error(error);
+    }
   };
 
   return (
@@ -66,8 +75,12 @@ export default function LoginPage() {
             />
           </div>
 
-          <button type="submit" className="w-full mt-2 btn-primary">
-            Sign In
+          <button
+            disabled={isSubmitting || !isValid}
+            type="submit"
+            className="w-full mt-2 btn-primary disabled:opacity-50"
+          >
+            {isSubmitting ? "Logging in..." : "Sign In"}
           </button>
         </form>
 

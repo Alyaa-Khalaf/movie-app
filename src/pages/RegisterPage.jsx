@@ -1,23 +1,35 @@
 import { usePageTitle } from "@/hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "@/schemas/registerSchem";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/components/auth/InputField";
+import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
   usePageTitle("Create Account");
 
+  const navigate = useNavigate();
+  const { signup } = useAuth();
+
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid },
   } = useForm({
     resolver: zodResolver(registerSchema),
     mode: "onChange",
   });
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data) => {
+    try {
+      await signup(data.email, data.password);
+      toast("Account created successfully!");
+      navigate("/login");
+    } catch (error) {
+      toast.error("Something went wrong!");
+      console.error(error);
+    }
   };
 
   return (
@@ -70,8 +82,12 @@ export default function RegisterPage() {
             error={errors.confirmPassword}
           />
 
-          <button type="submit" className="w-full mt-4 btn-primary">
-            Create Account
+          <button
+            disabled={isSubmitting || !isValid}
+            type="submit"
+            className={`w-full mt-4 btn-primary disabled:opacity-50`}
+          >
+            {isSubmitting ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
