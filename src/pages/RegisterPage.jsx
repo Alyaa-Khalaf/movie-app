@@ -14,10 +14,10 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(registerSchema),
+    mode: "onChange",
   });
   const onSubmit = (data) => {
     console.log("Form Data:", data);
-    // Task 1: Add your Firebase/MongoDB logic here
   };
 
   return (
@@ -60,6 +60,14 @@ export default function RegisterPage() {
             register={register}
             placeholder="Password"
             error={errors.password}
+          />
+          <InputField
+            label={"Confirm Password"}
+            type={"password"}
+            name="confirmPassword"
+            register={register}
+            placeholder="Confirm Password"
+            error={errors.confirmPassword}
           />
 
           <button type="submit" className="w-full mt-4 btn-primary">

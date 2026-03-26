@@ -12,7 +12,11 @@ const InputField = ({ label, register, type, name, placeholder, error }) => {
         }`}
         placeholder={placeholder}
       />
-      {error && <p className="text-sm text-red-500">{error.message}</p>}
+      {error && (
+        <p className="text-xs text-[var(--color-primary)] mt-1 font-medium">
+          {error.message}
+        </p>
+      )}{" "}
     </div>
   );
 };
