@@ -1,6 +1,27 @@
-import { Star, Calendar, Clock, Globe, Users } from "lucide-react";
+import { Star, Calendar, Clock, Globe, Users, Heart } from "lucide-react";
+import { useWishlistStore } from "@/store";
+import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export default function MovieInfo({ movie, onlyPoster }) {
+  const { t } = useTranslation();
+  const { toggleWishlist, isInWishlist } = useWishlistStore();
+  const wishlisted = isInWishlist(movie.id);
+
+  const handleToggleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const added = toggleWishlist({
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path,
+      vote_average: movie.vote_average,
+      release_date: movie.release_date,
+      overview: movie.overview,
+    });
+    toast.success(added ? t("movie.addWishlist") : t("movie.removeWishlist"));
+  };
+
   if (onlyPoster) {
     return (
       <div className="col-span-1">
@@ -10,6 +31,18 @@ export default function MovieInfo({ movie, onlyPoster }) {
             alt={movie.title}
             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
           />
+
+          {/* Wishlist button */}
+          <button
+            onClick={handleToggleWishlist}
+            className="absolute top-4 end-4 p-3 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-all duration-200 active:scale-90"
+            aria-label={wishlisted ? t("movie.removeWishlist") : t("movie.addWishlist")}
+          >
+            <Heart
+              size={24}
+              className={wishlisted ? "fill-primary text-primary" : "text-white"}
+            />
+          </button>
         </div>
       </div>
     );
