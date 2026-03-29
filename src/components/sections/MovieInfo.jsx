@@ -52,9 +52,9 @@ export default function MovieInfo({ movie, onlyPoster }) {
     <div className="space-y-6">
       {/* Title & Tagline */}
       <div className="space-y-2">
-        <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-card-foreground">
-          {movie.title}
-        </h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-widest mt-10">
+  {movie.title}
+</h1>
         {movie.tagline && (
           <p className="text-xl md:text-2xl font-light italic text-muted-foreground">
             "{movie.tagline}"
