@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { Heart, Star } from 'lucide-react'
-import { useWishlistStore } from '@/store'
+import { useWishlistStore , useAuthStore} from '@/store'
 import { getImageUrl, getYear, formatRating, getRatingColor, truncate } from '@/utils'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
@@ -8,11 +8,16 @@ import { useTranslation } from 'react-i18next'
 export default function MovieCard({ movie }) {
   const { t } = useTranslation()
   const { toggleWishlist, isInWishlist } = useWishlistStore()
-  const wishlisted = isInWishlist(movie.id)
+  const { isAuthenticated } = useAuthStore()
+  const wishlisted = isAuthenticated && isInWishlist(movie.id)
 
   const handleToggleWishlist = (e) => {
     e.preventDefault()
     e.stopPropagation()
+    if (!isAuthenticated) {
+      toast.error(t('Please login first')) 
+      return
+    }
     const added = toggleWishlist({
       id: movie.id,
       title: movie.title,
@@ -48,7 +53,7 @@ export default function MovieCard({ movie }) {
         </div>
 
         {/* Wishlist button */}
-        <button
+       <button
           onClick={handleToggleWishlist}
           className="absolute top-2 end-2 p-2 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-all duration-200 active:scale-90"
           aria-label={wishlisted ? t('movie.removeWishlist') : t('movie.addWishlist')}

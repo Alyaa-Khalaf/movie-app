@@ -23,7 +23,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
 
-  const wishlist = useWishlistStore((s) => s.wishlist);
+  const wishlist = useWishlistStore((s) => s.wishlist) || [];
+  const clearWishlist = useWishlistStore((s) => s.clearWishlist);
   const { isAuthenticated, user } = useAuthStore();
   const { isDark, toggleDark, language, setLanguage } = useThemeStore();
 
@@ -73,17 +74,19 @@ export default function Navbar() {
           </button>
 
           {/* Wishlist */}
-          <Link
-            to="/wishlist"
-            className="relative p-2 transition-colors hover:text-primary"
-          >
-            <Heart size={20} />
-            {wishlist.length > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1">
-                {wishlist.length}
-              </span>
-            )}
-          </Link>
+         {isAuthenticated && (
+            <Link
+              to="/wishlist"
+              className="relative p-2 transition-colors hover:text-primary"
+            >
+              <Heart size={20} />
+              {wishlist?.length > 0 && ( 
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1">
+                  {wishlist.length}
+                </span>
+              )}
+            </Link>
+          )}
 
           {/* Dark mode */}
           <button
