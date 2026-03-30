@@ -19,8 +19,8 @@ const resources = {
         sortBy: "Sort By",
       },
       movie: {
-        addWishlist: "Add to Wishlist",
-        removeWishlist: "Remove from Wishlist",
+        addWishlist: "Added to Watch list",
+        removeWishlist: "Removed from Watch list",
         watchTrailer: "Watch Trailer",
         recommendations: "Recommendations",
         overview: "Overview",
@@ -92,8 +92,8 @@ const resources = {
         sortBy: "ترتيب حسب",
       },
       movie: {
-        addWishlist: "أضف للمفضلة",
-        removeWishlist: "احذف من المفضلة",
+        addWishlist: "تمت الإضافة إلى قائمة المشاهدة",
+        removeWishlist: "تمت الإزالة من قائمة المشاهدة",
         watchTrailer: "شاهد الإعلان",
         recommendations: "توصيات",
         overview: "نبذة",

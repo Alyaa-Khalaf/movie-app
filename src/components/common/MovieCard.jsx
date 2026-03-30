@@ -39,6 +39,11 @@ export default function MovieCard({ movie }) {
             alt={movie.title}
             className="w-full h-full object-cover"
             loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src =
+                "https://placehold.co/500x750/1a1a1a/666666?text=No+Poster";
+            }}
           />
 
           {/* Rating badge - bottom left */}
