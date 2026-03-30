@@ -1,197 +1,139 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Search, Film } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { usePageTitle, useDebounce } from '@/hooks'
-import { searchMovies, getGenres } from '@/services/movieService'
+import { searchMovies } from '@/services/movieService'
 import MovieCard from '@/components/common/MovieCard'
-import Pagination from '@/components/common/Pagination'
-import GenreFilter from '@/components/common/GenreFilter'
+import PageSkeleton from '@/components/common/PageSkeleton'
 
 export default function SearchPage() {
   const { t } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
+  const initialQuery = searchParams.get('q') || ''
 
-  const queryParam = searchParams.get('query') || ''
-  const pageParam = Number(searchParams.get('page')) || 1
-
-  const [searchInput, setSearchInput] = useState(queryParam)
-  const debouncedQuery = useDebounce(searchInput, 500)
-
-  const [movies, setMovies] = useState([])
-  const [genres, setGenresState] = useState([])
-  const [selectedGenre, setSelectedGenre] = useState(null)
-  const [currentPage, setCurrentPage] = useState(pageParam)
-  const [totalPages, setTotalPages] = useState(1)
-  const [totalResults, setTotalResults] = useState(0)
+  const [query, setQuery] = useState(initialQuery)
+  const [results, setResults] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [hasSearched, setHasSearched] = useState(false)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
-  usePageTitle(debouncedQuery ? `${t('search.results')} "${debouncedQuery}"` : t('nav.search'))
+  const debouncedQuery = useDebounce(query, 500)
 
-  // Fetch genres once
+  usePageTitle(debouncedQuery ? `Search: ${debouncedQuery}` : 'Search')
+
   useEffect(() => {
-    getGenres()
-      .then((res) => setGenresState(res.data.genres))
-      .catch(() => {})
-  }, [])
-
-  // Sync debounced query to URL and reset page
-  useEffect(() => {
-    if (debouncedQuery !== queryParam) {
-      setCurrentPage(1)
-      const params = {}
-      if (debouncedQuery) params.query = debouncedQuery
-      params.page = '1'
-      setSearchParams(params, { replace: true })
-    }
-  }, [debouncedQuery])
-
-  // Fetch search results
-  const fetchResults = useCallback(async () => {
     if (!debouncedQuery.trim()) {
-      setMovies([])
-      setTotalPages(1)
-      setTotalResults(0)
-      setHasSearched(false)
+      setResults([])
       return
     }
 
-    setLoading(true)
-    setError(null)
-    setHasSearched(true)
-    try {
-      const res = await searchMovies(debouncedQuery, currentPage)
-      let results = res.data.results
-
-      // Client-side genre filtering for search results
-      if (selectedGenre) {
-        results = results.filter((m) => m.genre_ids?.includes(selectedGenre))
+    const fetch = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const res = await searchMovies(debouncedQuery, page)
+        setResults(res.data.results)
+        setTotalPages(res.data.total_pages)
+        setSearchParams({ q: debouncedQuery })
+      } catch (err) {
+        setError('Something went wrong. Please try again.')
+      } finally {
+        setLoading(false)
       }
-
-      setMovies(results)
-      setTotalPages(res.data.total_pages)
-      setTotalResults(res.data.total_results)
-    } catch (err) {
-      setError(err.response?.data?.status_message || err.message)
-    } finally {
-      setLoading(false)
     }
-  }, [debouncedQuery, currentPage, selectedGenre])
 
-  useEffect(() => {
-    fetchResults()
-  }, [fetchResults])
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page)
-    setSearchParams({ query: debouncedQuery, page: String(page) }, { replace: true })
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleGenreChange = (genreId) => {
-    setSelectedGenre(genreId)
-  }
+    fetch()
+  }, [debouncedQuery, page])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 animate-fade-in">
-      {/* Search Input */}
-      <div className="relative max-w-2xl mx-auto mb-8">
-        <Search
-          size={20}
-          className="absolute start-4 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
-        />
+    <div className="max-w-7xl mx-auto px-4 py-8">
+
+      {/* Search bar */}
+      <div className="flex gap-2 mb-8">
         <input
           type="text"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            setPage(1)
+          }}
           placeholder={t('search.placeholder')}
-          className="w-full ps-12 pe-4 py-3.5 bg-[var(--color-card)] border border-[var(--color-border)] rounded-xl text-base outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-[var(--color-text-muted)]"
-          autoFocus
+          className="flex-1 px-4 py-2.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-text)] outline-none focus:border-primary"
         />
+        <button className="btn-primary flex items-center gap-2">
+          <Search size={18} />
+          Search
+        </button>
       </div>
 
-      {/* Genre Filter */}
-      {genres.length > 0 && hasSearched && (
-        <div className="mb-6">
-          <GenreFilter
-            genres={genres}
-            selectedGenre={selectedGenre}
-            onGenreChange={handleGenreChange}
-          />
+      {/* Results label */}
+      {debouncedQuery && !loading && (
+        <p className="text-[var(--color-text-muted)] mb-6">
+          {t('search.results')} : <span className="font-semibold text-[var(--color-text)]">{debouncedQuery}</span>
+        </p>
+      )}
+
+      {/* Loading */}
+      {loading && <PageSkeleton />}
+
+      {/* Error */}
+      {error && (
+        <div className="text-center py-20">
+          <p className="text-red-500">{error}</p>
         </div>
       )}
 
-      {/* Results header */}
-      {hasSearched && debouncedQuery && !loading && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold">
-            {t('search.results')} <span className="text-primary">"{debouncedQuery}"</span>
-            <span className="text-sm text-[var(--color-text-muted)] font-normal ms-2">
-              ({totalResults} {totalResults === 1 ? 'result' : 'results'})
-            </span>
-          </h2>
+      {/* Empty state */}
+      {!loading && !error && debouncedQuery && results.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-[var(--color-text-muted)] text-lg">
+            {t('search.noResults')} "{debouncedQuery}"
+          </p>
         </div>
       )}
 
-      {/* Loading Skeleton */}
-      {loading && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <div key={i} className="skeleton aspect-[2/3] rounded-xl" />
+      {/* Results grid */}
+      {!loading && results.length > 0 && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {results.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       )}
 
-      {/* Error State */}
-      {!loading && error && (
-        <div className="text-center py-20">
-          <p className="text-lg text-[var(--color-text-muted)] mb-4">{t('common.error')}</p>
-          <button onClick={fetchResults} className="btn-primary">
-            {t('common.retry') || 'Retry'}
+      {/* Pagination */}
+      {totalPages > 1 && !loading && (
+        <div className="flex justify-center items-center gap-2 mt-10">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="px-4 py-2 rounded-lg border border-[var(--color-border)] disabled:opacity-50"
+          >
+            ‹
+          </button>
+
+          {[1, 2, 3, 4, 5].map((p) => (
+            <button
+              key={p}
+              onClick={() => setPage(p)}
+              className={`px-4 py-2 rounded-lg border ${page === p ? 'bg-primary text-black border-primary font-bold' : 'border-[var(--color-border)]'}`}
+            >
+              {p}
+            </button>
+          ))}
+
+          <span className="px-2">...</span>
+
+          <button
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className="px-4 py-2 rounded-lg border border-[var(--color-border)] disabled:opacity-50"
+          >
+            ›
           </button>
         </div>
-      )}
-
-      {/* Empty Initial State */}
-      {!loading && !error && !hasSearched && (
-        <div className="text-center py-20">
-          <Search size={64} className="mx-auto text-[var(--color-text-muted)] mb-4 opacity-50" />
-          <p className="text-lg text-[var(--color-text-muted)]">
-            {t('search.placeholder')}
-          </p>
-        </div>
-      )}
-
-      {/* No Results */}
-      {!loading && !error && hasSearched && movies.length === 0 && (
-        <div className="text-center py-20">
-          <Film size={64} className="mx-auto text-[var(--color-text-muted)] mb-4 opacity-50" />
-          <p className="text-lg text-[var(--color-text-muted)]">
-            {t('search.noResults')} <span className="text-primary">"{debouncedQuery}"</span>
-          </p>
-        </div>
-      )}
-
-      {/* Results Grid */}
-      {!loading && !error && movies.length > 0 && (
-        <>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </div>
-
-          {/* Pagination (only if no client-side genre filter applied) */}
-          {!selectedGenre && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          )}
-        </>
       )}
     </div>
   )
