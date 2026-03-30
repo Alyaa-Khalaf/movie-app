@@ -32,7 +32,6 @@ export function useFetch(fetchFn, deps = []) {
     setLoading(true)
     setError(null)
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
       const response = await fetchFn()
       setData(response.data)
     } catch (err) {
