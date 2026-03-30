@@ -93,11 +93,10 @@
 
   * {
     box-sizing: border-box;
-    @apply border-border outline-ring/50;
   }
 
   body {
-    @apply font-body bg-background text-foreground;
+    /* @apply font-body bg-background text-foreground; */
     background-color: var(--color-bg);
     color: var(--color-text);
     transition: background-color 0.3s ease, color 0.3s ease;

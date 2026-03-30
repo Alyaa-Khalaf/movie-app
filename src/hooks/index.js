@@ -26,11 +26,13 @@ export function useFetch(fetchFn, deps = []) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const abortRef = useRef(null)
+  
 
   const execute = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
+      await new Promise((resolve) => setTimeout(resolve, 2000))
       const response = await fetchFn()
       setData(response.data)
     } catch (err) {
