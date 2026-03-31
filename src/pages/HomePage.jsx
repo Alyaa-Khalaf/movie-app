@@ -184,7 +184,7 @@ export default function HomePage() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search and explore..."
+                placeholder= {t("home.searchPlaceholder") || "Search for movies..."}
                 className="flex-1 px-4 py-2.5 rounded-lg border border-white/30 bg-black/50 text-white placeholder-gray-400 outline-none focus:border-primary backdrop-blur-sm"
               />
               <button

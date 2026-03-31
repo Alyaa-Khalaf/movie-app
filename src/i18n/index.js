@@ -24,6 +24,7 @@ const resources = {
         sortTitle: "Title (A-Z)",
         surpriseMe: "Surprise Me !",
         search: "Search",
+        searchPlaceholder: "Search for movies...",
         watchNow: "Watch Now",
       },
       movie: {
@@ -106,6 +107,7 @@ const resources = {
         sortTitle: "العنوان (أ-ي)",
         surpriseMe: "فاجئني !",
         search: "بحث",
+        searchPlaceholder: "ابحث عن أفلام...",
         watchNow: "شاهد الآن",
       },
       movie: {
@@ -187,6 +189,7 @@ const resources = {
         sortTitle: "Titre (A-Z)",
         surpriseMe: "Surprenez-moi !",
         search: "Recherche",
+        searchPlaceholder: "Rechercher des films...",
         watchNow: "Voir maintenant",
       },
       movie: {
@@ -254,6 +257,7 @@ const resources = {
         sortTitle: "标题 (A-Z)",
         surpriseMe: "随机推荐 !",
         search: "搜索",
+        searchPlaceholder: "搜索电影...",
         watchNow: "立即观看",
       },
       movie: {
