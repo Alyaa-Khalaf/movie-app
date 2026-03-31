@@ -1,5 +1,5 @@
 import { Heart, Globe } from "lucide-react"
-import { useWishlistStore } from "@/store"
+import { useWishlistStore, useAuthStore } from "@/store"
 import { getImageUrl, formatDate } from "@/utils"
 import toast from "react-hot-toast"
 import { useTranslation } from "react-i18next"
@@ -8,10 +8,15 @@ export default function MovieInfo({ movie, onlyPoster, onlyDetails }) {
   const { t } = useTranslation()
   const { toggleWishlist, isInWishlist } = useWishlistStore()
   const wishlisted = isInWishlist(movie.id)
+  const { isAuthenticated } = useAuthStore()
 
   const handleToggleWishlist = (e) => {
     e.preventDefault()
     e.stopPropagation()
+     if (!isAuthenticated) {
+    toast.error('Please login first')
+    return
+  }
     const added = toggleWishlist({
       id: movie.id,
       title: movie.title,
