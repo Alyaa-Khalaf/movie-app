@@ -74,7 +74,7 @@ export default function MoviePreview({ movie, position }) {
             className="flex-1 btn-primary text-xs py-2 flex items-center justify-center gap-1"
           >
             <Play size={14} />
-            Watch Now
+            {t("movie.play")}
           </button>
           <button
             onClick={handleWishlist}

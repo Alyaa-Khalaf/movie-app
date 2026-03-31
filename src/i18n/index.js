@@ -37,6 +37,7 @@ const resources = {
         releaseDate: "Release Date",
         genres: "Genres",
         wishlist: "Add to Watch list",
+        play: "Watch Now",
       },
       wishlist: {
         title: "My Wishlist",
@@ -121,6 +122,7 @@ const resources = {
         releaseDate: "تاريخ الإصدار",
         genres: "التصنيفات",
         wishlist: "أضف إلى المفضلة",
+        play: "شاهد الآن",
       },
       wishlist: {
         title: "قائمة أمنياتي",
@@ -204,6 +206,7 @@ const resources = {
         releaseDate: "Date de sortie",
         genres: "Genres",
         wishlist: "Ajouter à ma liste",
+        play: "Voir maintenant",
       },
       wishlist: {
         title: "Ma liste",
@@ -274,6 +277,7 @@ const resources = {
         releaseDate: "上映日期",
         genres: "类型",
         wishlist: "加入心愿单",
+        play: "立即观看",
       },
       wishlist: {
         title: "我的心愿单",
