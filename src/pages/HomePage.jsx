@@ -88,6 +88,12 @@ const handleSearch = (e) => {
     setCurrentPage(1)
   }
 
+  const handleSurpriseMe = () => {
+  if (!movies || movies.length === 0) return
+  const random = movies[Math.floor(Math.random() * movies.length)]
+  navigate(`/movie/${random.id}`)
+}
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 animate-fade-in">
       {/* Hero Search */}
@@ -111,6 +117,18 @@ const handleSearch = (e) => {
       {t('nav.search')}
     </button>
   </form>
+ {/* surprise me button */}
+<div className="flex justify-center mt-4">
+  <button
+    onClick={handleSurpriseMe}
+    className="group relative overflow-hidden px-6 py-3 rounded-full bg-black text-white font-bold text-sm flex items-center gap-2 hover:scale-105 transition-all duration-300 shadow-xl"
+  >
+    <span className="text-xl animate-spin" style={{ animationDuration: '2s' }}>🎲</span>
+    <span>Surprise Me!</span>
+    <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full" />
+  </button>
+</div>
+
 </div>
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
