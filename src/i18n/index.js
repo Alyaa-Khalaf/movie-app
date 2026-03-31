@@ -41,6 +41,7 @@ const resources = {
         title: "My Wishlist",
         empty: "Your wishlist is empty",
         emptyDesc: "Add movies you love to keep track of them.",
+        backHome: "Back to Home",
       },
       search: {
         placeholder: "Search for movies...",
