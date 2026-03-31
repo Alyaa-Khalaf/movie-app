@@ -96,7 +96,7 @@ const handleSearch = (e) => {
   <p className="text-[var(--color-text-muted)] mb-6">
     {t('search.placeholder')}
   </p>
-  <form onSubmit={handleSearch} className="flex gap-2">
+  <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
     <input
       type="text"
       value={query}
