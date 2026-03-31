@@ -12,6 +12,7 @@ const resources = {
         register: "Register",
         account: "My Account",
         logout: "Logout",
+        backHome: "Back to Home",
       },
       home: {
         nowPlaying: "Now Playing",
@@ -113,6 +114,7 @@ const resources = {
         title: "قائمة أمنياتي",
         empty: "قائمتك فارغة",
         emptyDesc: "أضف الأفلام التي تحبها لمتابعتها.",
+        backHome: "العودة إلى الرئيسية",
       },
       search: {
         placeholder: "ابحث عن أفلام...",
@@ -189,6 +191,7 @@ const resources = {
         title: "Ma liste",
         empty: "Votre liste est vide",
         emptyDesc: "Ajoutez des films que vous aimez.",
+        backHome: "Retour à l'accueil",
       },
       search: {
         placeholder: "Rechercher des films...",
@@ -251,6 +254,7 @@ const resources = {
         title: "我的心愿单",
         empty: "心愿单为空",
         emptyDesc: "添加你喜欢的电影。",
+        backHome: "返回首页",
       },
       search: {
         placeholder: "搜索电影...",
