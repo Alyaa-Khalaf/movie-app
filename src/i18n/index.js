@@ -23,6 +23,8 @@ const resources = {
         sortDate: "Release Date",
         sortTitle: "Title (A-Z)",
         surpriseMe: "Surprise Me !",
+        search: "Search",
+        watchNow: "Watch Now",
       },
       movie: {
         addWishlist: "Added to Watch list",
@@ -33,6 +35,7 @@ const resources = {
         rating: "Rating",
         releaseDate: "Release Date",
         genres: "Genres",
+        wishlist: "Add to Watch list",
       },
       wishlist: {
         title: "My Wishlist",
@@ -101,6 +104,8 @@ const resources = {
         sortDate: "تاريخ الإصدار",
         sortTitle: "العنوان (أ-ي)",
         surpriseMe: "فاجئني !",
+        search: "بحث",
+        watchNow: "شاهد الآن",
       },
       movie: {
         addWishlist: "تمت الإضافة إلى قائمة المشاهدة",
@@ -111,6 +116,7 @@ const resources = {
         rating: "التقييم",
         releaseDate: "تاريخ الإصدار",
         genres: "التصنيفات",
+        wishlist: "أضف إلى المفضلة",
       },
       wishlist: {
         title: "قائمة أمنياتي",
@@ -179,6 +185,8 @@ const resources = {
         sortDate: "Date de sortie",
         sortTitle: "Titre (A-Z)",
         surpriseMe: "Surprenez-moi !",
+        search: "Recherche",
+        watchNow: "Voir maintenant",
       },
       movie: {
         addWishlist: "Ajouter à la liste",
@@ -189,6 +197,7 @@ const resources = {
         rating: "Note",
         releaseDate: "Date de sortie",
         genres: "Genres",
+        wishlist: "Ajouter à ma liste",
       },
       wishlist: {
         title: "Ma liste",
@@ -243,6 +252,8 @@ const resources = {
         sortDate: "上映日期",
         sortTitle: "标题 (A-Z)",
         surpriseMe: "随机推荐 !",
+        search: "搜索",
+        watchNow: "立即观看",
       },
       movie: {
         addWishlist: "加入心愿单",
@@ -253,6 +264,7 @@ const resources = {
         rating: "评分",
         releaseDate: "上映日期",
         genres: "类型",
+        wishlist: "加入心愿单",
       },
       wishlist: {
         title: "我的心愿单",
