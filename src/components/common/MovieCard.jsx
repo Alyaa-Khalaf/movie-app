@@ -6,6 +6,7 @@ import { getImageUrl, formatDate } from "@/utils";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import MoviePreview from "../movie/MoviePreview";
+import confetti from "canvas-confetti";
 
 export default function MovieCard({ movie }) {
   const { t } = useTranslation();
@@ -40,6 +41,18 @@ export default function MovieCard({ movie }) {
       release_date: movie.release_date,
       overview: movie.overview,
     });
+    if (added) {
+      confetti({
+        particleCount: 300,
+        spread: 70,
+         origin: {
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight,
+      },
+      colors: ['#E50914', '#ff4d4d', '#ff9999'],
+      scalar: 0.8,
+    })
+    }
     toast.success(added ? t("movie.addWishlist") : t("movie.removeWishlist"));
   };
 
