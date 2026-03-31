@@ -17,6 +17,10 @@ const resources = {
         nowPlaying: "Now Playing",
         allGenres: "All Genres",
         sortBy: "Sort By",
+        sortPopularity: "Popularity",
+        sortRating: "Rating",
+        sortDate: "Release Date",
+        sortTitle: "Title (A-Z)",
       },
       movie: {
         addWishlist: "Added to Watch list",
@@ -90,6 +94,10 @@ const resources = {
         nowPlaying: "يُعرض الآن",
         allGenres: "جميع التصنيفات",
         sortBy: "ترتيب حسب",
+        sortPopularity: "الأكثر شعبية",
+        sortRating: "التقييم",
+        sortDate: "تاريخ الإصدار",
+        sortTitle: "العنوان (أ-ي)",
       },
       movie: {
         addWishlist: "تمت الإضافة إلى قائمة المشاهدة",
@@ -162,6 +170,10 @@ const resources = {
         nowPlaying: "À l'affiche",
         allGenres: "Tous les genres",
         sortBy: "Trier par",
+        sortPopularity: "Popularité",
+        sortRating: "Note",
+        sortDate: "Date de sortie",
+        sortTitle: "Titre (A-Z)",
       },
       movie: {
         addWishlist: "Ajouter à la liste",
@@ -220,6 +232,10 @@ const resources = {
         nowPlaying: "正在上映",
         allGenres: "所有类型",
         sortBy: "排序方式",
+        sortPopularity: "热门",
+        sortRating: "评分",
+        sortDate: "上映日期",
+        sortTitle: "标题 (A-Z)",
       },
       movie: {
         addWishlist: "加入心愿单",

@@ -40,10 +40,10 @@ export const getRatingColor = (rating) => {
 
 // Sort options for discover API
 export const SORT_OPTIONS = [
-  { label: 'Popularity', value: 'popularity.desc' },
-  { label: 'Rating', value: 'vote_average.desc' },
-  { label: 'Release Date', value: 'release_date.desc' },
-  { label: 'Title (A-Z)', value: 'original_title.asc' },
+  { label: 'home.sortPopularity', value: 'popularity.desc' },
+  { label: 'home.sortRating', value: 'vote_average.desc' },
+  { label: 'home.sortDate', value: 'release_date.desc' },
+  { label: 'home.sortTitle', value: 'original_title.asc' },
 ]
 
 // cn utility (classnames merger)
