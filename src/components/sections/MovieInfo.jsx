@@ -65,8 +65,8 @@ export default function MovieInfo({ movie, onlyPoster, onlyDetails }) {
           <button onClick={handleToggleWishlist}>
             <Heart
               size={24}
-              fill={wishlisted ? "#F5C518" : "none"}
-              stroke={wishlisted ? "#F5C518" : "currentColor"}
+              fill={wishlisted ? "#E50914" : "none"}
+              stroke={wishlisted ? "#E50914" : "currentColor"}
               className="text-[var(--color-text-muted)]"
             />
           </button>

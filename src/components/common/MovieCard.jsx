@@ -108,8 +108,8 @@ export default function MovieCard({ movie }) {
           >
             <Heart
               size={18}
-              fill={wishlisted ? "#F5C518" : "none"}
-              stroke={wishlisted ? "#F5C518" : "currentColor"}
+              fill={wishlisted ? "#E50914" : "none"}
+              stroke={wishlisted ? "#E50914" : "currentColor"}
               className="text-[var(--color-text-muted)]"
             />
           </button>
