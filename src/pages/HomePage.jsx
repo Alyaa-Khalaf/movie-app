@@ -124,7 +124,7 @@ const handleSearch = (e) => {
     className="group relative overflow-hidden px-6 py-3 rounded-full bg-black text-white font-bold text-sm flex items-center gap-2 hover:scale-105 transition-all duration-300 shadow-xl"
   >
     <span className="text-xl animate-spin" style={{ animationDuration: '2s' }}>🎲</span>
-    <span>Surprise Me!</span>
+    <span> {t('home.surpriseMe')} </span>
     <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full" />
   </button>
 </div>

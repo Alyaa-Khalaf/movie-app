@@ -22,6 +22,7 @@ const resources = {
         sortRating: "Rating",
         sortDate: "Release Date",
         sortTitle: "Title (A-Z)",
+        surpriseMe: "Surprise Me !",
       },
       movie: {
         addWishlist: "Added to Watch list",
@@ -99,6 +100,7 @@ const resources = {
         sortRating: "التقييم",
         sortDate: "تاريخ الإصدار",
         sortTitle: "العنوان (أ-ي)",
+        surpriseMe: "فاجئني !",
       },
       movie: {
         addWishlist: "تمت الإضافة إلى قائمة المشاهدة",
@@ -176,6 +178,7 @@ const resources = {
         sortRating: "Note",
         sortDate: "Date de sortie",
         sortTitle: "Titre (A-Z)",
+        surpriseMe: "Surprenez-moi !",
       },
       movie: {
         addWishlist: "Ajouter à la liste",
@@ -239,6 +242,7 @@ const resources = {
         sortRating: "评分",
         sortDate: "上映日期",
         sortTitle: "标题 (A-Z)",
+        surpriseMe: "随机推荐 !",
       },
       movie: {
         addWishlist: "加入心愿单",
