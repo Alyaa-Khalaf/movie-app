@@ -35,11 +35,13 @@ const handleSearch = (e) => {
 }
 
   // Fetch genres once
+  const { i18n } = useTranslation()
+
   useEffect(() => {
     getGenres()
       .then((res) => setGenresState(res.data.genres))
       .catch(() => {})
-  }, [])
+  }, [i18n.language]) // Refetch genres if language changes
 
   // Fetch movies
   const fetchMovies = useCallback(async () => {
