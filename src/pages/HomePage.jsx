@@ -19,7 +19,6 @@ import { Heart } from "lucide-react";
 import { useWishlistStore, useAuthStore } from "@/store";
 import { formatDate } from "@/utils";
 import toast from "react-hot-toast";
-import confetti from "canvas-confetti";
 import { Link } from "react-router";
 
 export default function HomePage() {
@@ -113,7 +112,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 animate-fade-in">
+    <div className="px-4 py-10 mx-auto max-w-7xl animate-fade-in">
       {/* Hero Search */}
       {/* Cinematic Spotlight */}
       {featuredMovie && (
@@ -122,7 +121,7 @@ export default function HomePage() {
           <img
             src={`https://image.tmdb.org/t/p/original${featuredMovie.backdrop_path}`}
             alt={featuredMovie.title}
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
 
           {/* Gradient overlay */}
@@ -131,24 +130,24 @@ export default function HomePage() {
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-end p-8">
             <div className="max-w-lg">
-              <h1 className="text-4xl font-black text-white mb-2">
+              <h1 className="mb-2 text-4xl font-black text-white">
                 {featuredMovie.title}
               </h1>
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-primary font-bold">
+                <span className="font-bold text-primary">
                   ★ {featuredMovie.vote_average?.toFixed(1)}
                 </span>
-                <span className="text-gray-400 text-sm">
+                <span className="text-sm text-gray-400">
                   {formatDate(featuredMovie.release_date)}
                 </span>
               </div>
-              <p className="text-gray-300 text-sm line-clamp-2 mb-6">
+              <p className="mb-6 text-sm text-gray-300 line-clamp-2">
                 {featuredMovie.overview}
               </p>
               <div className="flex gap-3">
                 <Link
                   to={`/movie/${featuredMovie.id}`}
-                  className="btn-primary flex items-center gap-2"
+                  className="flex items-center gap-2 btn-primary"
                 >
                   ▶ {t("home.watchNow") || "Watch Now"}
                 </Link>
@@ -179,7 +178,7 @@ export default function HomePage() {
             {/* Search bar */}
             <form
               onSubmit={handleSearch}
-              className="flex flex-col sm:flex-row gap-2 mt-6"
+              className="flex flex-col gap-2 mt-6 sm:flex-row"
             >
               <input
                 type="text"
@@ -190,7 +189,7 @@ export default function HomePage() {
               />
               <button
                 type="submit"
-                className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto"
+                className="flex items-center justify-center w-full gap-2 btn-primary sm:w-auto"
               >
                 <Search size={18} />
                 {t("home.search") || "Search"}
@@ -200,18 +199,23 @@ export default function HomePage() {
         </div>
       )}
       <div className="flex justify-center mt-4">
-  <button
-    onClick={handleSurpriseMe}
-    className="group relative overflow-hidden px-6 py-3 rounded-full bg-black text-white font-bold text-sm flex items-center gap-2 hover:scale-105 transition-all duration-300 shadow-xl"
-  >
-    <span className="text-xl animate-spin" style={{ animationDuration: '2s' }}>🎲</span>
-    <span>{t('home.surpriseMe')}</span>
-    <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full" />
-  </button>
-</div>
+        <button
+          onClick={handleSurpriseMe}
+          className="relative flex items-center gap-2 px-6 py-3 overflow-hidden text-sm font-bold text-white transition-all duration-300 bg-black rounded-full shadow-xl group hover:scale-105"
+        >
+          <span
+            className="text-xl animate-spin"
+            style={{ animationDuration: "2s" }}
+          >
+            🎲
+          </span>
+          <span>{t("home.surpriseMe")}</span>
+          <div className="absolute inset-0 transition-opacity duration-300 rounded-full opacity-0 bg-primary group-hover:opacity-20" />
+        </button>
+      </div>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h1 className="text-4xl font-heading text-primary tracking-wider">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-4xl tracking-wider font-heading text-primary">
           {t("home.nowPlaying")}
         </h1>
         <SortSelect value={sortBy} onChange={handleSortChange} />
@@ -230,7 +234,7 @@ export default function HomePage() {
 
       {/* Loading Skeleton */}
       {loading && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {Array.from({ length: 20 }).map((_, i) => (
             <div key={i} className="skeleton aspect-[2/3] rounded-xl" />
           ))}
@@ -239,7 +243,7 @@ export default function HomePage() {
 
       {/* Error State */}
       {!loading && error && (
-        <div className="text-center py-20">
+        <div className="py-20 text-center">
           <p className="text-lg text-[var(--color-text-muted)] mb-4">
             {t("common.error")}
           </p>
@@ -251,7 +255,7 @@ export default function HomePage() {
 
       {/* Empty State */}
       {!loading && !error && movies.length === 0 && (
-        <div className="text-center py-20">
+        <div className="py-20 text-center">
           <Film
             size={64}
             className="mx-auto text-[var(--color-text-muted)] mb-4"
@@ -265,7 +269,7 @@ export default function HomePage() {
       {/* Movie Grid */}
       {!loading && !error && movies.length > 0 && (
         <>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
