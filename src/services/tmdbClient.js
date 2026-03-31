@@ -11,7 +11,7 @@ const tmdbClient = axios.create({
 // Request interceptor – inject language if stored
 tmdbClient.interceptors.request.use((config) => {
   const lang = localStorage.getItem('app_language') || 'en'
-  config.params = { ...config.params, language: lang }
+  config.params = { language: lang, ...config.params }
   return config
 })
 

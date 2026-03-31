@@ -4,6 +4,7 @@ import {
   getMovieRecommendations,
 } from "../services/movieService";
 import tmdbClient from "@/services/tmdbClient";
+import { useTranslation } from "react-i18next";
 
 export function useMovieDetails(id) {
   const [movie, setMovie] = useState(null);
@@ -11,6 +12,7 @@ export function useMovieDetails(id) {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const fetchAllData = async () => {
@@ -27,7 +29,9 @@ export function useMovieDetails(id) {
 
         setMovie(movieRes.data);
 
-        const videosRes = await tmdbClient.get(`/movie/${id}/videos`);
+        const videosRes = await tmdbClient.get(`/movie/${id}/videos`, {
+          params: { language: "en" },
+        });
         const mainTrailer = videosRes.data.results.find(
           (vid) => vid.type === "Trailer" && vid.site === "YouTube",
         );
@@ -44,7 +48,7 @@ export function useMovieDetails(id) {
 
     fetchAllData();
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [id]);
+  }, [id, i18n.language]);
 
   return { movie, trailer, recommendations, loading, error };
 }
