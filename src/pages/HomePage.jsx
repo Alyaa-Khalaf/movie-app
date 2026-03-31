@@ -90,7 +90,7 @@ export default function HomePage() {
   useEffect(() => {
     fetchMovies();
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [fetchMovies]);
+  }, [fetchMovies, currentPage, selectedGenre, sortBy, i18n.language]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
