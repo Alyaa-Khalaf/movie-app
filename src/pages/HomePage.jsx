@@ -154,7 +154,7 @@ export default function HomePage() {
                 <button
                   onClick={() => {
                     if (!isAuthenticated) {
-                      toast.error("Please login first");
+                      toast.error(t("auth.loginRequired") || "Please login first");
                       return;
                     }
                     toggleWishlist(featuredMovie);

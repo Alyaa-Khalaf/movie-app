@@ -66,6 +66,7 @@ const resources = {
         loginSuccess: "Logged in successfully!",
         registerSuccess: "Account created successfully!",
         invalidCredentials: "Invalid email or password",
+        loginRequired: "Please login first",
       },
       common: {
         loading: "Loading...",
@@ -149,6 +150,7 @@ const resources = {
         loginSuccess: "تم تسجيل الدخول بنجاح!",
         registerSuccess: "تم إنشاء الحساب بنجاح!",
         invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+        loginRequired: "يرجى تسجيل الدخول أولاً",
       },
       common: {
         loading: "جارٍ التحميل...",
@@ -216,6 +218,7 @@ const resources = {
       },
       auth: {
         loginTitle: "Content de vous revoir",
+        loginSubtitle: "Connectez-vous pour accéder à votre liste",
         registerTitle: "Créer un compte",
         email: "Email",
         username: "Nom d'utilisateur",
@@ -224,6 +227,7 @@ const resources = {
         registerBtn: "S'inscrire",
         noAccount: "Pas encore de compte ?",
         hasAccount: "Déjà un compte ?",
+        loginRequired: "Veuillez vous connecter d'abord",
       },
       common: {
         loading: "Chargement...",
@@ -284,6 +288,7 @@ const resources = {
       },
       auth: {
         loginTitle: "欢迎回来",
+        loginSubtitle: "登录以访问您的心愿单",
         registerTitle: "创建账户",
         email: "邮箱",
         username: "用户名",
@@ -292,6 +297,7 @@ const resources = {
         registerBtn: "注册",
         noAccount: "没有账户？",
         hasAccount: "已有账户？",
+        loginRequired: "请先登录",
       },
       common: {
         loading: "加载中...",

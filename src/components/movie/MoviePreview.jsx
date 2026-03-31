@@ -16,7 +16,7 @@ export default function MoviePreview({ movie, position }) {
     e.preventDefault()
     e.stopPropagation()
     if (!isAuthenticated) {
-      toast.error('Please login first')
+      toast.error(t("auth.loginRequired") || "Please login first")
       return
     }
     toggleWishlist({

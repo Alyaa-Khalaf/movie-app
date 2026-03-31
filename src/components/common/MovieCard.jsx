@@ -30,7 +30,7 @@ export default function MovieCard({ movie }) {
     e.preventDefault();
     e.stopPropagation();
     if (!isAuthenticated) {
-      toast.error("Please login first");
+      toast.error(t("auth.loginRequired") || "Please login first");
       return;
     }
     const added = toggleWishlist({
