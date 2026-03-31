@@ -34,7 +34,7 @@ export default function WishlistCard({ movie }) {
               {movie.title}
             </h3>
             <button onClick={handleRemove} className="shrink-0">
-              <Heart size={20} fill="#F5C518" stroke="#F5C518" />
+              <Heart size={20} fill="#E50914" stroke="#E50914" />
             </button>
           </div>
 
