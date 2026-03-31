@@ -199,6 +199,16 @@ export default function HomePage() {
           </div>
         </div>
       )}
+      <div className="flex justify-center mt-4">
+  <button
+    onClick={handleSurpriseMe}
+    className="group relative overflow-hidden px-6 py-3 rounded-full bg-black text-white font-bold text-sm flex items-center gap-2 hover:scale-105 transition-all duration-300 shadow-xl"
+  >
+    <span className="text-xl animate-spin" style={{ animationDuration: '2s' }}>🎲</span>
+    <span>{t('home.surpriseMe')}</span>
+    <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full" />
+  </button>
+</div>
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h1 className="text-4xl font-heading text-primary tracking-wider">
