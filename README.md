@@ -1,16 +1,78 @@
-# React + Vite
+# 🎬 Movie App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern movie browsing app built with React, allowing users to explore now-playing movies, search, view details, and manage a wishlist.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+[View Live](https://movie-app-5mqm.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📦 Tech Stack
+- **React 19** + **Vite**
+- **React Router v7** — Routing + Lazy Loading
+- **Zustand** — Global State Management
+- **Axios** — HTTP Client
+- **Tailwind CSS v3** — Styling
+- **shadcn/ui** — UI Components
+- **Firebase** — Authentication
+- **react-i18next** — Internationalization (en, ar, fr, zh)
+- **react-hot-toast** — Notifications
+- **canvas-confetti** — Animations
 
-## React Compiler
+## ✨ Features
+- 🎥 Browse Now Playing movies
+- 🔍 Search with debouncing
+- 🎬 Movie Details + Trailer + Recommendations
+- ❤️ Wishlist with confetti animation
+- 🌙 Dark Mode
+- 🌍 Multi-language support (EN, AR, FR, ZH) with RTL
+- 🎲 Surprise Me — random movie discovery
+- 🎬 Cinematic Spotlight hero section
+- 👁️ Floating Movie Preview on hover
+- 📄 Pagination + Genre Filtering + Sorting
+- 💀 Loading Skeletons
+- 🔐 Firebase Authentication
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👥 The Team
 
-## Expanding the ESLint configuration
+| Teammate | Role | Contributions |
+|---|---|---|
+| **Safeya** | Data & Auth Lead | Firebase authentication, Login/Register pages, Global state setup (Zustand), Protected routes |
+| **Esraa** | Discovery Lead | Home Page, Search functionality, Pagination, Genre Filtering, Movie Sorting |
+| **Zainab** | Details Lead | Movie Details page, Recommendations, YouTube Trailer embed, React Router + Lazy Loading |
+| **Alyaa** | UI/UX Lead | shadcn/ui setup, Dark Mode, i18n + RTL, Loading Skeletons, UI Redesign for all pages, Cinematic Spotlight, Floating Preview, Confetti animation, Surprise Me feature |
+| **Asalla** | UI/UX Lead | UI components, Responsive Design |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/Alyaa-Khalaf/movie-app.git
+cd movie-app
+
+# Install dependencies
+npm install
+
+# Setup environment variables
+cp .env.example .env
+# Add your TMDB API key and Firebase config in .env
+
+# Run the app
+npm run dev
+```
+
+## 🔑 Environment Variables
+
+```
+VITE_TMDB_API_KEY=your_tmdb_api_key
+VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
+VITE_TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p/w500
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_firebase_app_id
+```
+
+## 📝 API Reference
+- [TMDB API Docs](https://developer.themoviedb.org)
+- [Firebase Docs](https://firebase.google.com/docs)
