@@ -1,15 +1,29 @@
 import { Link } from "react-router";
 import { Heart } from "lucide-react";
+import { useState } from "react";
 import { useWishlistStore, useAuthStore } from "@/store";
 import { getImageUrl, formatDate } from "@/utils";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import MoviePreview from "../movie/MoviePreview";
 
 export default function MovieCard({ movie }) {
   const { t } = useTranslation();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
   const { isAuthenticated } = useAuthStore();
   const wishlisted = isAuthenticated && isInWishlist(movie.id);
+  const [showPreview, setShowPreview] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
+  const handleMouseEnter = () => {
+    const timeout = setTimeout(() => setShowPreview(true), 800);
+    setHoverTimeout(timeout);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeout);
+    setShowPreview(false);
+  };
 
   const handleToggleWishlist = (e) => {
     e.preventDefault();
@@ -30,6 +44,12 @@ export default function MovieCard({ movie }) {
   };
 
   return (
+    <div
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+
     <Link to={`/movie/${movie.id}`} className="group block">
       <div className="relative rounded-xl overflow-hidden card-hover">
         {/* Poster */}
@@ -116,5 +136,10 @@ export default function MovieCard({ movie }) {
         </div>
       </div>
     </Link>
+    {/* Preview Popup */}
+      {showPreview && (
+        <MoviePreview movie={movie} position="bottom" />
+      )}
+    </div>
   );
 }
