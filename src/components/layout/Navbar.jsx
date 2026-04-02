@@ -53,6 +53,12 @@ export default function Navbar() {
           Movie App
         </Link>
 
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <Link to="/" className="hover:text-primary transition-colors">{t('nav.home')}</Link>
+          <Link to="/search" className="hover:text-primary transition-colors">{t('nav.search')}</Link>
+        </nav>
+
         {/* Desktop nav links */}
         {/* <nav className="items-center hidden gap-6 text-sm font-medium md:flex">
           <Link to="/" className="transition-colors hover:text-primary">

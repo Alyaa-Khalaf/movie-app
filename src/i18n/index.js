@@ -1,4 +1,5 @@
 import i18n from "i18next";
+import { Home } from "lucide-react";
 import { initReactI18next } from "react-i18next";
 
 const resources = {
@@ -26,6 +27,7 @@ const resources = {
         search: "Search",
         searchPlaceholder: "Search for movies...",
         watchNow: "Watch Now",
+        Home:"Home",
       },
       movie: {
         addWishlist: "Added to Watch list",
@@ -111,6 +113,7 @@ const resources = {
         search: "بحث",
         searchPlaceholder: "ابحث عن أفلام...",
         watchNow: "شاهد الآن",
+        Home: "الرئيسية",
       },
       movie: {
         addWishlist: "تمت الإضافة إلى قائمة المشاهدة",
@@ -195,6 +198,7 @@ const resources = {
         search: "Recherche",
         searchPlaceholder: "Rechercher des films...",
         watchNow: "Voir maintenant",
+        Home: "Accueil",
       },
       movie: {
         addWishlist: "Ajouter à la liste",
@@ -266,6 +270,7 @@ const resources = {
         search: "搜索",
         searchPlaceholder: "搜索电影...",
         watchNow: "立即观看",
+        Home: "首页",
       },
       movie: {
         addWishlist: "加入心愿单",
